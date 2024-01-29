@@ -1,1 +1,117 @@
-<p>register works!</p>
+<div class="flex h-screen py-24 flex-col justify-center items-center gap-0 bg-gray-50 font-rustica">
+    <div class="flex w-5/6 p-0 items-center gap-11">
+        <form (ngSubmit)="onSubmit()" class="flex w-[576px] p-8 flex-col justify-center items-center gap-5 rounded-lg bg-white shadow">
+            <app-logo class="pb-8 w-full"></app-logo>
+
+            <div class="flex p-0 flex-col items-start gap-2.5 self-stretch">
+                <div class="self-stretch text-primary-900 text-2xl font-bold">
+                    Create your account.
+                </div>
+
+                <div class="text-gray-500 self-stretch font-rustica text-sm font-medium">
+                    Start your website in seconds. Already have an account? <a routerLink="/login" class="text-primary-600">Login here </a>
+                </div>
+            </div>
+
+            <div class="flex p-0 flex-col items-start gap-5 self-stretch">
+                <div class="flex p-0 items-start gap-5 self-stretch">
+                    <app-text-input
+                        class="flex-1" 
+                        label="Email"
+                        id="email"
+                        name="email"
+                        placeholder="name@company.com"
+                        [(ngModel)]="email"
+                        [error]="errors.email"
+                        [ngModelOptions]="{standalone: true}"
+                        (blur)="validateField('email', email)"
+                    />
+                    <app-text-input
+                        class="flex-1" 
+                        label="Full Name"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="e.g. Bonnie Green"
+                        [(ngModel)]="fullName"
+                        [error]="errors.fullName"
+                        [ngModelOptions]="{standalone: true}"
+                        (blur)="validateField('fullName', fullName)"
+                    />
+                </div>
+
+                <div class="flex p-0 items-start gap-5 self-stretch">
+                    <div class="flex flex-col items-start gap-2 flex-1">
+                        <label class="self-stretch text-primary-900 font-rustica text-sm font-medium text-gray-500 font-rustica text-sm font-normal">
+                            Country
+                        </label>
+
+                        <select
+                            class="flex py-3 px-4 items-center gap-2.5 self-stretch rounded-lg w-full border border-gray-300 outline-none bg-gray-50 text-gray-500 font-rustica text-sm font-normal focus:ring-primary-500 focus:border-primary-500"
+                            [(ngModel)]="country"
+                            name="country"
+                        >
+                            <option value="" disabled selected>Select a country...</option>
+                            <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
+                        </select>
+                    </div>
+
+                    <app-strong-password-input
+                        class="flex-1"
+                        [(ngModel)]="password"
+                        [error]="errors.password"
+                        [ngModelOptions]="{standalone: true}"
+                        (blur)="validateField('password', password)"
+                    />
+                </div>
+                
+                <div class="flex p-0 justify-center items-center gap-8 self-stretch">
+                    <div class="h-px flex-1 bg-gray-200"></div>
+                    <span class="text-gray-500 text-center font-rustica text-sm font-medium">or sign in with</span>
+                    <div class="h-px flex-1 bg-gray-200"></div>
+                </div>
+
+                <app-social-buttons class="w-full" />
+            </div>
+
+            <div class="flex p-0 flex-col items-center gap-3 self-stretch">
+                <div class="flex items-start gap-2 self-stretch">
+                    <input
+                        id="isAgreeToTcAndPrivacyPolicy"
+                        type="checkbox" 
+                        class="flex w-4 h-4 p-0 flex-col justify-center items-center gap-0 rounded border-[0.5px] bg-gray-50"
+                        [(ngModel)]="isAgreeToTcAndPrivacyPolicy"
+                        [ngModelOptions]="{standalone: true}"
+                    />
+                    <label for="isAgreeToTcAndPrivacyPolicy" class="self-stretch text-gray-500 text-sm font-normal">
+                        By signing up you agree to Osavus’s <a class="text-blue-600">Terms and Conditions</a> and <a class="text-blue-600">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <div class="flex items-start gap-2 self-stretch">
+                    <input
+                        id="isAllowSendPromotionalEmails"
+                        type="checkbox" 
+                        class="flex w-4 h-4 p-0 flex-col justify-center items-center gap-0 rounded border-[0.5px] bg-gray-50" 
+                        [(ngModel)]="isAllowSendPromotionalEmails"
+                        [ngModelOptions]="{standalone: true}"
+                    />
+                    <label for="isAllowSendPromotionalEmails" class="self-stretch text-gray-500 text-sm font-normal">
+                        Email me about product updates and resources.
+                    </label>
+                </div>
+            </div>
+
+            <button 
+                class="flex py-3.5 px-5 justify-center items-center gap-2 self-stretch rounded-lg bg-primary-600 text-white font-rustica text-sm font-medium tracking-wide"
+                type="submit"
+            >
+                Create account
+            </button>
+
+            <app-email-verify-modal [email]="email" [(show)]="emailVerify"></app-email-verify-modal>
+        </form>
+
+        <div class="flex w-[660px] h-[637px] p-0 flex-col justify-center items-center gap-8 shrink-0 bg-[url('assets/Illustration.png')] bg-center bg-contain bg-no-repeat">
+        </div>
+    </div>
+</div>

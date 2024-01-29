@@ -1,1 +1,48 @@
-<p>email-verify-modal works!</p>
+<div *ngIf="show" id="email-verify-modal" tabindex="-1" class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-[576px] max-w-2xl max-h-full">
+        <div class="relative flex p-8 flex-col justify-center gap-6 bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-center rounded-t">
+                <app-logo class="pb-8"></app-logo>
+            </div>
+            
+            <div class="self-stretch text-primary-900 text-center text-2xl font-bold">
+                Verify your email address
+            </div>
+
+            <div class="flex p-6 flex-col items-center gap-0 self-stretch">
+                <div class="flex-1 text-gray-500 text-center text-base font-normal">
+                    An email has been sent to:
+                    <div class="font-bold">{{ email }}</div>
+                </div>
+
+                <div class="flex-1 text-gray-500 text-center text-base font-normal">
+                    Please click the link in the email to verify your email address
+                </div>
+            </div>
+
+            <div class="flex p-0 flex-col items-center gap-3 self-stretch">
+                <div class="text-gray-900 text-sm font-normal">
+                    Did you make a typo on your email?
+                    <a routerLink="/register" (click)="closeModal()" class="text-blue-500 text-sm font-medium">Register again</a>
+                </div>
+            </div>
+
+            <button
+                class="flex py-3.5 px-5 justify-center items-center gap-2 self-stretch rounded-lg border-2 bg-white shadow border-primary-700"
+                type="button"
+                [disabled]="timeTrack !== 0"
+                [ngClass]="{
+                    'opacity-50': timeTrack !== 0,
+                    'opacity-100': timeTrack == 0
+                }"
+                (click)="resendEmail()"
+            >
+                <span class="text-primary-700 text-sm font-medium tracking-wide">
+                    Resend email {{ timeTrack !== 0 ? '(' + timeTrack + ')' : '' }}
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="show" modal-backdrop="" class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div>

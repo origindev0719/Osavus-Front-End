@@ -1,1 +1,21 @@
-<p>text-input works!</p>
+<div class="flex flex-col items-start gap-2">
+    <label [for]="id" class="self-stretch text-primary-900 font-rustica text-sm font-medium text-gray-500 font-rustica text-sm">
+        {{ label }}
+    </label>
+
+    <input
+        class="flex py-3 px-4 items-center gap-2.5 self-stretch rounded-lg border border-gray-300 outline-none bg-gray-50 text-gray-500 font-rustica text-sm font-normal focus:ring-primary-500 focus:border-primary-500"
+        [placeholder]="placeholder"
+        [id]="id"
+        [name]="name"
+        [type]="type"
+        [(ngModel)]="value"
+        [ngClass]="{
+            'border-red-500': error,
+        }"
+        (blur)="onBlur()"
+    />
+    <div *ngIf="error" class="text-red-500 text-xs">
+        {{ error }}
+    </div>
+</div>

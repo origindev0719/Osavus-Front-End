@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Rustica';
+    src: url('../assets/Fontspring-DEMO-5_rustica-regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    /* Exclude the range for special characters */
+    unicode-range: U+0041-FFFF;
+}
+
+@font-face {
+    font-family: 'FallbackFont';
+    src: local('Arial'), local('Helvetica'), local('sans-serif');
+    /* Include the range for special characters except "@" */
+    unicode-range: U+0020-003F, U+005B-FFFF;
+}
+
+body {
+    font-family: 'FallbackFont', 'Rustica', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
